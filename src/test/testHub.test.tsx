@@ -6,7 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render, screen } from '@testing-library/react';
 import Validate from '../components/validate';
-import { validateZipCode, createHeading, formatPrice, isLowerCase, isPrime, genitive } from '../utils/functionLibrary';
+import { validateZipCode, createHeading, formatPrice, isLowerCase, isPrime, genitive, getUsers, getGroups } from '../utils/functionLibrary';
 
 
 test('renders learn react link', () => {
@@ -41,7 +41,7 @@ describe('formatPrice', () => {
 describe('isLowerCase', () => {
   it("should return true if string is lowercase", () => {
     expect(isLowerCase("hello")).toBe(true);
-    expect(isLowerCase("Hello")).toBe(false);  
+    expect(isLowerCase("Hello")).toBe(false);
   });
 });
 
@@ -64,5 +64,57 @@ describe('genitive', () => {
   it("should return input as noun", () => {
     expect(genitive("cat")).toBe("cat's");
     expect(genitive("cats")).toBe("cats");
+  });
+});
+
+describe('getUsers', () => {
+  it("should return users", async () => {
+    const users = await getUsers();
+    expect(users).toEqual([
+      {
+        "name": "Erik",
+        "group": 1
+      },
+      {
+        "name": "Lisa",
+        "group": 2
+      },
+      {
+        "name": "Hampus",
+        "group": 2
+      },
+      {
+        "name": "Linda",
+        "group": 3
+      },
+      {
+        "name": "Eva",
+        "group": 1
+      },
+      {
+        "name": "Anna",
+        "group": 3
+      }
+    ]);
+  });
+});
+
+describe('getGroups', () => {
+  it("should return groups", async () => {
+    const groups = await getGroups();
+    expect(groups).toEqual([
+      {
+        "id": 1,
+        "groupName": "Hajarna"
+      },
+      {
+        "id": 2,
+        "groupName": "Valarna"
+      },
+      {
+        "id": 3,
+        "groupName": "Zebrorna"
+      }
+    ]);
   });
 });
